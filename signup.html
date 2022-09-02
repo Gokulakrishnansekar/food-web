@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signup.css">
+    <title>BGSW SIGNUP</title>
+</head>
+<body>
+    <div id="container">
+    <h1>SIGN UP FORM</h1>
+    <form >
+        <label for="email">Enter emailid:</label>
+        <input type="text" id="email" name="emailid" onkeyup="validatemail()">
+        <div id="mailerr" class="merror"></div>
+        <br>
+
+        <label for="pass">Enter password:</label>
+        <input type="password" id="pass" name="pwd" onkeyup="validatepassaft()" ><br><br>
+
+        <label for="repass">Re-enter password: </label>
+        <input type="password" id="repass" name="repwd" onblur="validatepass()" >
+        <div id="passerr" class="error"></div><br>
+
+        <label for="phno">Enter Phone number: </label>
+        <input type="text" id="phno"  name="phnno" onkeyup="validatephno()" >
+        <div id="phnoerr" class="error"></div><br>
+        <div>
+            <button   id="btn" onclick="signup()" >sign up</button>
+        <button onclick="clear()">cancel</button>
+        </div>
+        
+        
+        <!-- <button>sign up</button>
+        <button>cancel</button> -->
+    </form>
+    </div>
+    <script>
+        
+        var mailerror=true;
+        var pserr=true;
+        var perr=true;
+        var eerr=true;
+        function validatemail()
+        {
+            let mail=document.getElementById("email").value;
+            let mmsg=document.getElementById("mailerr");
+            let text="";
+            let regex=/^[a-z]+\w*@[a-z]+\.[a-z]+/g;
+            if(regex.test(mail))
+            {
+                console.log("perfect");
+                mailperr=false;
+            }
+            else
+            {
+                mmsg.style.color="red";
+       text="***Please enter correct mail id***";
+       mailperr=true;
+            }
+            mmsg.innerHTML=text;
+        }
+    function validatephno()
+    {
+        let x=document.getElementById("phno").value;
+        let pher=document.getElementById("phnoerr");
+       
+        let text="";
+        if(!isNaN(x) && x.length==10)
+        {
+            
+            perr=false;
+        } 
+        else
+        {
+            pher.style.color="red";
+       text="***Please enter correct phone number***";
+       perr=true;
+        }
+        pher.innerHTML=text;
+    }
+    function validatepass()
+    {
+        let x=document.getElementById("pass").value;
+        let y=document.getElementById("repass").value
+        let passer=document.getElementById("passerr");
+        let text="";
+        if(x===y)
+        {
+            text="";
+            pserr=false;
+        } 
+        else
+        {
+        passer.style.color="red";
+       text="***please reenter the correct password***";
+       pserr=true;
+        }
+        passer.innerHTML=text;
+    }
+    function validatepassaft()
+        {
+            if(document.getElementById("repass").value =="")
+            {
+              //  
+              console.log("empty");
+              
+            }
+            else
+            {
+                console.log("already there");
+                validatepass();
+            }
+        }
+        function clear()
+        {
+            document.getElementsByTagName("form").reset();
+        }
+    function signup()
+    {
+        let btn=document.getElementById("btn");
+        if(pserr==false && perr==false)
+        {
+            console.log("no errs")
+            window.alert("successfully singed up");
+
+        }
+        else
+         {
+           console.log("err");
+           window.alert("please fill all the field with the correct formats");
+         }
+        
+    }
+    </script>
+</body>
+</html>
